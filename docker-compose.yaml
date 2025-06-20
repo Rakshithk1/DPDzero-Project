@@ -7,11 +7,23 @@ services:
     ports:
       - "8001:8001"
 
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3 
+
   python:
     build:
       context: ./DPDZero.py
     ports:
       - "8002:8002"
+      
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8002/ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
 
   nginx:
     build:
