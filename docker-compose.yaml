@@ -1,0 +1,23 @@
+version: "3.9"
+
+services:
+  go:
+    build:
+      context: ./DPDZero-GO
+    ports:
+      - "8001:8001"
+
+  python:
+    build:
+      context: ./DPDZero.py
+    ports:
+      - "8002:8002"
+
+  nginx:
+    build:
+      context: ./ngnix
+    ports:
+      - "8080:8080"
+    depends_on:
+      - go
+      - python
